@@ -58,6 +58,18 @@ bool Edm2NumpyAlg::execute() {
 
     LogInfo << "The SimEvent ID: " << simevt->getEventID() << std::endl;
 
+
+    auto true_info = simevt->getTracksVec();
+    float init_x, init_y, init_z;
+    for (auto simtrack: true_info) {
+        //pdgid = simtrack->getPDGID();
+        init_x = simtrack->getInitX();
+        init_y = simtrack->getInitY();
+        init_z = simtrack->getInitZ();
+        //init_mass = simtrack->getInitMass();
+    }
+
+
     // = convert hit to numpy array =
     auto hit_collection = simevt->getCDHitsVec();
     auto hit_col_size = hit_collection.size();
@@ -90,6 +102,9 @@ bool Edm2NumpyAlg::execute() {
     // register them 
     SniperDataPtr<PyDataStore> pystore(*getRoot(), "DataStore");
     LogInfo << "Register the value to PyDataStore. " << std::endl;
+    pystore->set("x", init_x);
+    pystore->set("y", init_y);
+    pystore->set("z", init_z);
     pystore->set("pmtid", arr_pmtid);
     pystore->set("npe", arr_npe);
     pystore->set("hittime", arr_hittime);

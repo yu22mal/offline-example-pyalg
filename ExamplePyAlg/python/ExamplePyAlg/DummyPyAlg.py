@@ -47,6 +47,7 @@ class DummyPyAlg(PyAlgBase):
 
     def __init__(self, name):
         PyAlgBase.__init__(self, name)
+        self.pos = None
         self.pmtid = None
         self.npe = None
         self.hittime = None
@@ -57,6 +58,7 @@ class DummyPyAlg(PyAlgBase):
 
     def execute(self):
         ## Get pmtid/npe/hittime
+        self.pos = self.datastore["x"], self.datastore["y"], self.datastore["z"]
         self.pmtid = self.datastore["pmtid"]
         self.npe = self.datastore["npe"]
         self.hittime = self.datastore["hittime"]
@@ -89,6 +91,9 @@ class DummyPyAlg(PyAlgBase):
     # HELPERS
     ##########################################################################
     def process_data_in_numpy(self):
+        # get initial position
+        self.LogInfo("True vertex: ", self.pos)
+
         # calculate the sum of nPE
         totalpe = np.sum(self.npe)
         self.LogInfo("Total PE (numpy): ", totalpe)
