@@ -61,11 +61,13 @@ bool Edm2NumpyAlg::execute() {
 
     auto true_info = simevt->getTracksVec();
     float init_x, init_y, init_z;
+    float edep;
     for (auto simtrack: true_info) {
         //pdgid = simtrack->getPDGID();
         init_x = simtrack->getInitX();
         init_y = simtrack->getInitY();
         init_z = simtrack->getInitZ();
+        edep = simtrack->getEdep();
         //init_mass = simtrack->getInitMass();
     }
 
@@ -105,6 +107,7 @@ bool Edm2NumpyAlg::execute() {
     pystore->set("x", init_x);
     pystore->set("y", init_y);
     pystore->set("z", init_z);
+    pystore->set("edep", edep);
     pystore->set("pmtid", arr_pmtid);
     pystore->set("npe", arr_npe);
     pystore->set("hittime", arr_hittime);
