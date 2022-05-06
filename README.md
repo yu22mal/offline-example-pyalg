@@ -3,8 +3,8 @@
 ## Quickstart
 
 ```bash
-$ git clone https://github.com/yu22mal/offline-example-pyalg.git
-$ # git clone git@github.com:JUNO-collaboration/offline-example-pyalg.git # if you have ssh access
+$ git clone git@github.com:yu22mal/offline-example-pyalg.git
+$ # git clone https://github.com/yu22mal/offline-example-pyalg.git # if you do not have ssh access
 $ cd offline-example-pyalg
 $ source /cvmfs/juno.ihep.ac.cn/centos7_amd64_gcc830/Pre-Release/J22.1.0-rc1/setup.sh
 $ ./build.sh
